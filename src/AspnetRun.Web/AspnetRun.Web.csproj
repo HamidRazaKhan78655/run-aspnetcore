@@ -15,4 +15,8 @@
     <ProjectReference Include="..\AspnetRun.Infrastructure\AspnetRun.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\" />
+  </ItemGroup>
+
 </Project>

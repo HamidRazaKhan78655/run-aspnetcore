@@ -71,7 +71,7 @@ namespace AspnetRun.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
+                endpoints.MapControllerRoute( name: "default", pattern: "{controller=api/Auth}/{action=Login}/{id?}");
             });
         }
 
@@ -79,7 +79,8 @@ namespace AspnetRun.Web
         {
             // Add Core Layer
             services.Configure<AspnetRunSettings>(Configuration);
-
+            services.AddMvc();
+            services.AddControllers();
             // Add Infrastructure Layer
             ConfigureDatabases(services);
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
