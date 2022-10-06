@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace AspnetRun.Infrastructure.Repository
 {
-    internal class GameRepository : Repository<Game>, IGameRepository
+    public class GameRepository : Repository<Game>, IGameRepository
     {
         public GameRepository(AspnetRunContext dbContext) : base(dbContext)
         {

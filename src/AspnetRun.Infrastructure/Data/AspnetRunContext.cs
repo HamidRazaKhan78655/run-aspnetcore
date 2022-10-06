@@ -18,6 +18,7 @@ namespace AspnetRun.Infrastructure.Data
         {
             builder.Entity<Product>(ConfigureProduct);
             builder.Entity<Category>(ConfigureCategory);
+            builder.Entity<Game>(ConfigureGame);
         }
 
         private void ConfigureProduct(EntityTypeBuilder<Product> builder)
@@ -30,7 +31,16 @@ namespace AspnetRun.Infrastructure.Data
                 .IsRequired()
                 .HasMaxLength(100);
         }
+        private void ConfigureGame(EntityTypeBuilder<Game> builder)
+        {
+            builder.ToTable("Game");
 
+            builder.HasKey(ci => ci.Id);            
+
+            builder.Property(cb => cb.Name)
+                .IsRequired()
+                .HasMaxLength(100);
+        }
         private void ConfigureCategory(EntityTypeBuilder<Category> builder)
         {
             builder.ToTable("Category");
