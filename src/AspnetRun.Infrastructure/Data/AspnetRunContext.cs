@@ -12,6 +12,7 @@ namespace AspnetRun.Infrastructure.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Game> Games { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

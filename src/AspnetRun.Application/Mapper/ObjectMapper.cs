@@ -30,6 +30,7 @@ namespace AspnetRun.Application.Mapper
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.ProductName)).ReverseMap();
 
             CreateMap<Category, CategoryModel>().ReverseMap();
+            CreateMap<Game, GameModel>().ReverseMap();
         }
     }
 }
