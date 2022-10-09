@@ -1,5 +1,6 @@
 ﻿using AspnetRun.Web.Interfaces;
 using AspnetRun.Web.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -13,16 +14,32 @@ namespace AspnetRun.Web.Controllers.api.Auth
     {
         private readonly IProductPageService _productPageService;
         private readonly IGamePageService _gamePageService;
+        private readonly IJWTManagerPageService _jWTManagerPageService;
 
-        public AuthController(IProductPageService productPageService, IGamePageService gamePageService)
+        public AuthController(IProductPageService productPageService, IGamePageService gamePageService , IJWTManagerPageService jWTManagerPageService)
         {
             this._productPageService = productPageService;
             this._gamePageService = gamePageService;
+            this._jWTManagerPageService = jWTManagerPageService;
         }
-        [HttpGet("Login")]
-        public IEnumerable<string> Login()
+        public class Tokens
         {
-            return new string[] { "value1", "value2" };
+            public string Token { get; set; }
+            public string RefreshToken { get; set; }
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("authenticate")]
+        public IActionResult Authenticate(UsersViewModel usersdata)
+        {
+            var token = _jWTManagerPageService.Authenticate(usersdata);
+
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(token);
         }
         [HttpGet("Logout")]
         public IEnumerable<string> Logout()
