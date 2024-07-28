@@ -1,14 +1,9 @@
-using AspnetRun.Application.Interfaces;
-using AspnetRun.Application.Services;
+
 using AspnetRun.Core;
 using AspnetRun.Core.Interfaces;
 using AspnetRun.Infrastructure.Logging;
 using AspnetRun.Infrastructure.Data;
-using AspnetRun.Infrastructure.Repository;
 using AspnetRun.Web.HealthChecks;
-using AspnetRun.Web.Interfaces;
-using AspnetRun.Web.Services;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,10 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AspnetRun.Core.Repositories;
-using AspnetRun.Core.Repositories.Base;
 using AspnetRun.Core.Configuration;
-using AspnetRun.Infrastructure.Repository.Base;
 
 namespace AspnetRun.Web
 {
@@ -82,20 +74,8 @@ namespace AspnetRun.Web
 
             // Add Infrastructure Layer
             ConfigureDatabases(services);
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
-            // Add Application Layer
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<ICategoryService, CategoryService>();
-
-            // Add Web Layer
-            services.AddAutoMapper(typeof(Startup)); // Add AutoMapper
-            services.AddScoped<IIndexPageService, IndexPageService>();
-            services.AddScoped<IProductPageService, ProductPageService>();
-            services.AddScoped<ICategoryPageService, CategoryPageService>();
 
             // Add Miscellaneous
             services.AddHttpContextAccessor();

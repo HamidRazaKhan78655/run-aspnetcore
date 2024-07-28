@@ -10,15 +10,15 @@ namespace AspnetRun.Infrastructure.Data
         {
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        //public DbSet<Product> Products { get; set; }
+        //public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Product>(ConfigureProduct);
-            builder.Entity<Category>(ConfigureCategory);
+           // builder.Entity<Product>(ConfigureProduct);
+           // builder.Entity<Category>(ConfigureCategory);
         }
-
+/*
         private void ConfigureProduct(EntityTypeBuilder<Product> builder)
         {
             builder.ToTable("Product");
@@ -39,6 +39,6 @@ namespace AspnetRun.Infrastructure.Data
             builder.Property(cb => cb.CategoryName)
                 .IsRequired()
                 .HasMaxLength(100);
-        }
+        }*/
     }
 }
